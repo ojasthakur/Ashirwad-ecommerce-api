@@ -4,8 +4,8 @@ const Order = require('../models/orderModel')
 const { StatusCodes } = require('http-status-codes')
 const CustomError = require('../errors')
 const { checkPermissions } = require('../utils/')
-const { reset } = require('nodemon')
-const { custom } = require('joi')
+//const { reset } = require('nodemon')
+//const { custom } = require('joi')
 
 const fakeStripeApi = async ({ amount, currency }) => {
     const client_secret = 'someRandomValue'
