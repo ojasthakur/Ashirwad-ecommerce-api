@@ -76,6 +76,9 @@ app.use('/api/v1/users',userRouter)
 app.use('/api/v1/products',productRouter)
 app.use('/api/v1/reviews', reviewRouter)
 app.use('/api/v1/orders', orderRouter)
+app.use('/testing_route', (req, res) => {
+    res.send('This is the write foler!')
+})
 //USE ERROR HANDLER AND NOT FOUND MIDDLEWARE AT THE END
 app.use(notFoundMiddleware)
 app.use(errorHandlerMiddleware)
