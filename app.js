@@ -46,14 +46,14 @@ app.use(rateLimiter({
 app.use(helmet())
 app.use(cors({
     // origin: '*',
-    // origin: 'http://localhost:3000',
-    // optionsSuccessStatus: 200,
+    origin: 'localhost:3000',
+    optionsSuccessStatus: 200,
 }))
-app.all('/', function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "http://localhost:3000");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
-    next()
-  });
+// app.all('/', function(req, res, next) {
+//     res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+//     res.header("Access-Control-Allow-Headers", "X-Requested-With");
+//     next()
+//   });
 app.use(xss())
 app.use(mongoSanitize())
 
