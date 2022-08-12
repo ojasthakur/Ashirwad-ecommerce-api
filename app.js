@@ -44,7 +44,10 @@ app.use(rateLimiter({
     max:100
 }))
 app.use(helmet())
-app.use(cors())
+app.use(cors({
+    origin: '*',
+    optionsSuccessStatus: 200,
+  }))
 app.use(xss())
 app.use(mongoSanitize())
 
