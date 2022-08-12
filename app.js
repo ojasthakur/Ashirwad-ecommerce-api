@@ -48,6 +48,7 @@ app.use(cors({
     // origin: '*',
     origin: 'http://localhost:3000',
     optionsSuccessStatus: 200,
+    credentials: true
 }))
 // app.all('/', function(req, res, next) {
 //     res.header("Access-Control-Allow-Origin", "http://localhost:3000");
