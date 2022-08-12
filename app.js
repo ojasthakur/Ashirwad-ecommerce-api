@@ -46,7 +46,7 @@ app.use(rateLimiter({
 app.use(helmet())
 app.use(cors({
     // origin: '*',
-    origin: 'localhost:3000',
+    origin: 'http://localhost:3000',
     optionsSuccessStatus: 200,
 }))
 // app.all('/', function(req, res, next) {
