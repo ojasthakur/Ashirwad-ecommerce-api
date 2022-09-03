@@ -61,7 +61,8 @@ const uploadImage = async (req, res) => {
     //....Free temp storage on server
     fs.unlinkSync(tempPath)
     //....link product to image url
-    product.image = result.secure_url
+    // product.image = result.secure_url
+    product.image.push(result.secure_url)
     //....Save modified product to dataBase
     await product.save()
     //....Send back product with new image url
