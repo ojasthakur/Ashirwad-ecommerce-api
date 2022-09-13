@@ -24,10 +24,14 @@ const ProductSchema = new mongoose.Schema({
     //     //required: true
     // },
     image: [{type: String}],
+    // category: {
+    //     type: String,
+    //     required: [true, 'Product category is required']
+    // },
     category: {
-        type: String,
-        required: [true, 'Product category is required'],
-        enum: ['office','kitchen','bedroom']
+        type: mongoose.Types.ObjectId,
+        ref: 'Category',
+        required: true 
     },
     company: {
         type: String,

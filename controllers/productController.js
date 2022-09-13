@@ -14,9 +14,11 @@ const createProduct = async (req, res) => {
 }
 
 const getAllProducts = async (req, res) => {
-    const products = await Product.find({})    
+    const products = await Product.find(req.query) 
+    console.log(req.query)
+    console.log('hello world')
     res.status(StatusCodes.OK).json({
-        NoOfProdcuts: products.length,
+        NoOfProdcutsss: products.length,
         products: products
     })
 }
@@ -85,11 +87,12 @@ const updateProduct = async (req, res) => {
             new: true
         }
     )
+    //new: true returns the update result here in product
 
     if (!product) {
         throw new CustomError.NotFoundError(`No product with id: ${productId}`)
     }
-    res.status(StatusCodes.OK).json({ msg: 'Product Update', Product: product })
+    res.status(StatusCodes.OK).json({ msg: 'Product Updated', Product: product })
 }
 
 const deleteProduct = async (req, res) => {
