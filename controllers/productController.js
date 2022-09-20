@@ -4,6 +4,7 @@ const CustomError = require('../errors')
 const cloudinary = require('cloudinary').v2
 const fs = require('fs')
 const path = require('path')
+const { query } = require('express')
 
 
 const createProduct = async (req, res) => {
@@ -14,9 +15,27 @@ const createProduct = async (req, res) => {
 }
 
 const getAllProducts = async (req, res) => {
-    const products = await Product.find(req.query) 
+    // destructuring the query object to get only what we allow for find
+    const {category, name, company} = req.query
+
+    const queryObject = {}
+    if (category) {
+        queryObject.category = category
+    }
+    if (company) {
+        queryObject.company = company
+    }
+
+    // We shall use query operator for name for regex search
+    if (name) {
+        queryObject.name = { $regex: name, $options: 'i'}
+    }
+    console.log(queryObject)
+
+    const products = await Product.find(queryObject) 
+
     console.log(req.query)
-    console.log('hello world')
+
     res.status(StatusCodes.OK).json({
         NoOfProdcutsss: products.length,
         products: products

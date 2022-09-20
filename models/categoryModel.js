@@ -8,7 +8,8 @@ const CategorySchema = new mongoose.Schema({
 
     category: {
         type: String,
-        required: [true, "Category is required"]
+        required: [true, "Category is required"],
+        unique: true
     }
 })
 

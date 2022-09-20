@@ -30,7 +30,8 @@ const productRouter = require('./routes/productRoutes')
 const reviewRouter = require('./routes/reviewRoutes')
 const orderRouter = require('./routes/orderRoutes')
 const categoryRouter = require('./routes/categoryRouter');
-
+const brandRouter = require('./routes/brandRouter')
+const productTypeRouter = require('./routes/productTypeRouter')
 //....DATABASE....
 const connectDB = require('./db/connect')
 
@@ -88,6 +89,8 @@ app.use('/api/v1/products',productRouter)
 app.use('/api/v1/reviews', reviewRouter)
 app.use('/api/v1/orders', orderRouter)
 app.use('/api/v1/categories', categoryRouter)
+app.use('/api/v1/brands', brandRouter)
+app.use('/api/v1/productTypes',productTypeRouter)
 app.use('/testing_route', (req, res) => {
     res.send('This is the write foler!')
 })

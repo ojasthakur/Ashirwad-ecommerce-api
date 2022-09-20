@@ -31,16 +31,23 @@ const ProductSchema = new mongoose.Schema({
     category: {
         type: mongoose.Types.ObjectId,
         ref: 'Category',
-        required: true 
+        required: [true, "Product Category is required"] 
     },
-    company: {
-        type: String,
-        required: [true, 'Product Company is required'],
-        enum: {
-            values: ['ikea', 'liddy', 'marcos'],
-            message: '{VALUE} is not supported'
-        }
+    brand: {
+        type: mongoose.Types.ObjectId,
+        ref: 'Brand',
+        required: [true, "Product Brand is required"] 
+        
     },
+
+    // company: {
+    //     type: String,
+    //     required: [true, 'Product Company is required'],
+    //     enum: {
+    //         values: ['ikea', 'liddy', 'marcos'],
+    //         message: '{VALUE} is not supported'
+    //     }
+    // },
     colors: {
         type: [String],
         required: [true],
