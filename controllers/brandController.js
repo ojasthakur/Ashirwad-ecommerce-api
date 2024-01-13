@@ -6,7 +6,7 @@ const createBrand = async (req, res) => {
     const brand = await Brand.create(req.body)
 
     res.status(StatusCodes.CREATED).json({
-        "create brand": brand
+        "brand": brand
     })
 }
 
@@ -14,8 +14,8 @@ const getAllBrands = async (req, res) => {
     const brands = await Brand.find({})
     res.status(StatusCodes.OK).json(
         {
-            "No. of Brands": brands.length,
-            Brands: brands
+            totalCount: brands.length,
+            brands: brands
         }
     )
 }

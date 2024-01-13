@@ -11,11 +11,11 @@ const createCategory = async (req, res) => {
 }
 
 const getAllCategories = async (req, res) => {
-    const categories = await Category.find({})
+    const categories = await Category.find({ section: req.query.section })
     res.status(StatusCodes.OK).json(
         {
-            "No. of categories": categories.length,
-            Categories: categories
+            "totalCount": categories.length,
+            "categories": categories
         }
     )
 }
@@ -24,7 +24,7 @@ const updateCategory = async (req, res) => {
     const { id: categoryId } = req.params
 
     const category = await Category.findOneAndUpdate({ _id: categoryId }, req.body, {
-        runValidators: true, 
+        runValidators: true,
         new: true
     })
     if (!category) {
@@ -36,4 +36,4 @@ const updateCategory = async (req, res) => {
         "Updated Category": category
     })
 }
-module.exports = {createCategory, getAllCategories, updateCategory}
+module.exports = { createCategory, getAllCategories, updateCategory }

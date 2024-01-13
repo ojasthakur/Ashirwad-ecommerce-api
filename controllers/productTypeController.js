@@ -12,8 +12,7 @@ const createProductType = async (req, res) => {
 }
 
 const getAllProductTypesOfCategory = async (req, res) => {
-
-    const {categoryId } = req.body
+    const { categoryId } = req.query;
     if (!categoryId) {
         throw new CustomError.NotFoundError(`No category id given`)
     }
@@ -27,7 +26,7 @@ const getAllProductTypesOfCategory = async (req, res) => {
 
     res.status(StatusCodes.OK).json(
         {
-            "No. of Product Types for given Category": productTypes.length,
+            totalCount: productTypes.length,
             productTypes: productTypes
         }
     )
@@ -37,7 +36,7 @@ const updateProductType = async (req, res) => {
     const { id: productTypeId } = req.params
 
     const productType = await ProductType.findOneAndUpdate({ _id: productTypeId }, req.body, {
-        runValidators: true, 
+        runValidators: true,
         new: true
     })
     if (!productType) {
@@ -49,4 +48,4 @@ const updateProductType = async (req, res) => {
         "Updated ProductType": ProductType
     })
 }
-module.exports = {createProductType, getAllProductTypesOfCategory, updateProductType}
+module.exports = { createProductType, getAllProductTypesOfCategory, updateProductType }
