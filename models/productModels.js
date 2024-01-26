@@ -2,11 +2,15 @@ const { boolean } = require('joi')
 const mongoose = require('mongoose')
 
 const ProductSchema = new mongoose.Schema({
+    section: {
+        type: String,
+        required: [true, 'Section of product is required'],
+    },
     name: {
         type: String,
         required: [true, 'Product name is required'],
         trim: true,
-        maxlength: [150,'Name cannot be more than 150 characters']
+        maxlength: [150, 'Name cannot be more than 150 characters']
     },
     price: {
         type: Number,
@@ -16,14 +20,14 @@ const ProductSchema = new mongoose.Schema({
     description: {
         type: String,
         required: [true, 'Product description is required'],
-        maxlength:[1000, 'Description cannot be more than 1000 characters']
+        maxlength: [1000, 'Description cannot be more than 1000 characters']
     },
     // image: {
     //     type: String,
     //     default: '/productImages/example.jpg'
     //     //required: true
     // },
-    image: [{type: String}],
+    image: [{ type: String }],
     // category: {
     //     type: String,
     //     required: [true, 'Product category is required']
@@ -31,14 +35,19 @@ const ProductSchema = new mongoose.Schema({
     category: {
         type: mongoose.Types.ObjectId,
         ref: 'Category',
-        required: [true, "Product Category is required"] 
+        required: [true, "Product Category is required"]
     },
     brand: {
         type: mongoose.Types.ObjectId,
         ref: 'Brand',
-        required: [true, "Product Brand is required"] 
-        
+        required: [true, "Product Brand is required"]
     },
+    productType: {
+        type: mongoose.Types.ObjectId,
+        ref: 'ProductType',
+        required: [true, "Product Type is required"]
+    },
+    discount: { type: Number },
 
     // company: {
     //     type: String,
@@ -50,7 +59,7 @@ const ProductSchema = new mongoose.Schema({
     // },
     colors: {
         type: [String],
-        required: [true],
+        required: [false],
         default: ['#222']
     },
     featured: {
@@ -72,14 +81,14 @@ const ProductSchema = new mongoose.Schema({
     },
     numberOfReviews: {
         type: Number,
-        default: 0 
+        default: 0
     },
     user: {
         type: mongoose.Types.ObjectId,
         ref: 'User',
         required: true
     },
-}, { timestamps: true, toJSON:{virtuals:true}, toObject:{virtuals:true} })
+}, { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } })
 //....toJson and toObject are added to accept virtuals
 //....now we have to add the virtual property
 ProductSchema.virtual('reviews', { //....'reviews' is the ref we used in the populate method in the controller
@@ -91,7 +100,7 @@ ProductSchema.virtual('reviews', { //....'reviews' is the ref we used in the pop
 })
 
 ProductSchema.pre('remove', async function () {
-    await this.model('Review').deleteMany({product : this._id})
+    await this.model('Review').deleteMany({ product: this._id })
 })
 
 module.exports = mongoose.model('Product', ProductSchema)
